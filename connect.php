@@ -1,13 +1,14 @@
 <?php
-    // Yhteysparametrit
-    $user = "root";
-    $pass = "root66";
-    $host = "dbserver.fi";
-    $db = "testikanta";
-
-    // Yhteyden muodostaminen (mukana virheiden hallinta)
-    $yhteys = mysqli_connect($host,$user,$pass) or die("Yhteyttä palvelimeen ei voitu muodostaa!");
-
-    // Valitaan käytettävä tietokanta
-    mysqli_select_db($yhteys,$db) or die("Tietokantaa ei voitu valita!");
+// Ladataan yhteysmuuttujat taulukkoon
+$config = parse_ini_file('../../../connect.ini');
+// Yhteyden muodostaminen tietokantaan
+$con = mysqli_connect($config['server'],$config['username'],$config['password']);
+// MerkistÃ¶n asettaminen
+mysqli_query($con,"set names utf8");
+if($con == false) {
+echo "tietokantayhteyden muodostaminen epäonnistui";
+}
+else {
+ mysqli_select_db($con,$config['dbname']) or die ("Tietokannan valitseminen epäonnistui");
+}
 ?>

@@ -1,3 +1,8 @@
+<?php
+    // Aloitetaan istunto
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <title>Profiili</title>
@@ -12,6 +17,12 @@ body {font-size:16px;}
 .w3-half img:hover{opacity:1}
 </style>
 <body>
+
+<?php
+    // Kutsutaan PHP:n istuntomuuttujia
+    echo "Tunnus on " . $_SESSION['tunnus'] . ".<br>";
+    echo "Salasana on " . $_SESSION['password'] . ".";
+?>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>

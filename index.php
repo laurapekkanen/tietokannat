@@ -1,6 +1,11 @@
+<?php
+    // Aloitetaan istunto
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Budjettilaskuri</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
@@ -13,7 +18,21 @@ body {font-size:16px;}
     a {text-decoration: none;}
 </style>
 <body>
-    <p>lol</p>
+
+<?php
+    // Asetetaan istuntomuuttujat
+    $_SESSION['tunnus'];
+    $_SESSION['salasana'];
+?>
+
+<?php
+  // Tietokantayhteys
+  include "connect.php";
+
+  // Muuttujat
+  $query = "select * from KAYTTAJANIMI";
+  $sql = mysqli_query($con,$query);
+?>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
@@ -21,14 +40,14 @@ body {font-size:16px;}
   <div class="w3-container">
     <a href="index.php"><h3 class="w3-padding-64"><b>Budjettilaskuri</b></h3></a>
   </div>
-  <div class="w3-bar-block">
+  <!--<div class="w3-bar-block">
     <a href="profiili.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Profiili</a>
     <a href="suunnitelma.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Suunnitelma</a>
     <a href="menottulot.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Menot ja Tulot</a>
     <a href="tilanne.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Tilanne</a>
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Aiemmat kuukaudet</a>
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Kirjaudu ulos</a>
-  </div>
+  </div>-->
 </nav>
 
 <!-- Top menu on small screens -->
@@ -53,24 +72,28 @@ body {font-size:16px;}
   <div class="w3-container" id="contact" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-red"><b>Kirjaudu</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <form action="/action_page.php" target="_blank">
+    <form action="check.php" method="post">
         <div class="w3-group">
         <label>Käyttjätunnus</label>
         <input class="w3-input w3-border" type="text" name="tunnus" required>
       </div>
         <div class="w3-group">
         <label>Salasana</label>
-        <input class="w3-input w3-border" type="text" name="salasana" type="password" maxlenght="20" minlength="5" required>
+        <input class="w3-input w3-border" name="salasana" type="password" maxlenght="20" minlength="5" required>
       </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Kirjaudu</button>
+      <input type="submit" name="kirjaudu" value="Kirjaudu" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom"/>
     </form>
   </div>
 
+    <!-- TARVITSEEKO TEHDÄ TOINEN TSEKKAUS LUO TUNNUS KOHDASSA? (ONKO TUNNUS JO OLEMASSA)
+    KAKSI ERI KYSELYÄ?
+    MIHIN INSERT?-->
+
   <!-- Luo tunnus -->
   <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Luo kättäjä</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b>Luo käyttäjä</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <form action="connect.php" method="post">
+    <form action="profiili.php" method="post" onsubmit="return checkForm(this);">
       <div class="w3-group">
         <label>Etunimi</label>
         <input class="w3-input w3-border" type="text" name="enimi" required>
@@ -80,18 +103,18 @@ body {font-size:16px;}
         <input class="w3-input w3-border" type="text" name="snimi" required>
       </div>
         <div class="w3-group">
-        <label>Käyttjätunnus</label>
-        <input class="w3-input w3-border" type="text" name="tunnus" required>
+        <label>Käyttäjätunnus</label>
+        <input class="w3-input w3-border" type="text" name="tunnus2" required>
       </div>
         <div class="w3-group">
         <label>Salasana</label>
-        <input class="w3-input w3-border" type="text" name="salasana" type="password" maxlenght="20" minlength="5" required>
+        <input class="w3-input w3-border" name="salasana1" type="password" maxlenght="20" minlength="5" required>
       </div>
       <div class="w3-group">
         <label>Vahvista salasana</label>
-        <input class="w3-input w3-border" type="text" name="salasana2" type="password" maxlenght="20" minlength="5" required>
+        <input class="w3-input w3-border"  name="salasana2" type="password" maxlenght="20" minlength="5" required>
       </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Luo tunnus</button>
+      <input type="submit" name="luo_tunnus" value="Luo tunnus" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom"/>
     </form>
   </div>
 
@@ -113,12 +136,12 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
+
+function checkForm(form){
+    if(form.salasana1 == form.salasana2)
+    return true;
+}else {
+    alert("Error: Tarkista salasana!");
 }
 </script>
 

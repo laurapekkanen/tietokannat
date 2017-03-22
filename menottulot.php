@@ -23,6 +23,7 @@ body {font-size:16px;}
     <a href="profiili.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Profiili</a>
     <a href="suunnitelma.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Suunnitelma</a>
     <a href="menottulot.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Menot ja Tulot</a>
+    <a href="tilanne.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Tilanne</a>
     <a href="kuukaudet.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Aiemmat kuukaudet</a>
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Kirjaudu ulos</a>
   </div>
