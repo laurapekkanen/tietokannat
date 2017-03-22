@@ -13,6 +13,7 @@ body {font-size:16px;}
     a {text-decoration: none;}
 </style>
 <body>
+    <p>lol</p>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
