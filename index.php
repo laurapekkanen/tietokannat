@@ -1,8 +1,3 @@
-<?php
-    // Aloitetaan istunto
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html>
 <title>Budjettilaskuri</title>
@@ -18,21 +13,6 @@ body {font-size:16px;}
     a {text-decoration: none;}
 </style>
 <body>
-
-<?php
-    // Asetetaan istuntomuuttujat
-    $_SESSION['tunnus'];
-    $_SESSION['salasana'];
-?>
-
-<?php
-  // Tietokantayhteys
-  include "connect.php";
-
-  // Muuttujat
-  $query = "select * from KAYTTAJANIMI";
-  $sql = mysqli_query($con,$query);
-?>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
@@ -93,7 +73,7 @@ body {font-size:16px;}
   <div class="w3-container" id="contact" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-red"><b>Luo käyttäjä</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <form action="profiili.php" method="post" onsubmit="return checkForm(this);">
+    <form action="insert.php" method="post" onsubmit="return checkForm(this);"><!--onsubmit tärkeä-->
       <div class="w3-group">
         <label>Etunimi</label>
         <input class="w3-input w3-border" type="text" name="enimi" required>
@@ -136,7 +116,7 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 
-
+//salasanan tarkistus
 function checkForm(form){
     if(form.salasana1 == form.salasana2)
     return true;

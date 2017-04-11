@@ -13,6 +13,16 @@ body {font-size:16px;}
 </style>
 <body>
 
+<?php
+    // Kutsutaan PHP:n istuntomuuttujia
+    echo "Tunnus on " . $_SESSION['user'] . ".<br>";
+    //echo "Salasana on " . $_SESSION['password'] . ".";
+
+    $query = "select * from KAYTTAJA, KAYTTAJANIMI where KAYTTAJA.kayttajaID=KAYTTANIMI.kayttajaID";
+    $sql = mysqli_query($con,$query);
+    //$meno = "select * from MENOT";
+?>
+
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
@@ -49,21 +59,22 @@ body {font-size:16px;}
 
       <!-- Contact -->
   <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Contact.</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b>Menot.</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
     <form action="/action_page.php" target="_blank">
       <div class="w3-group">
         <label>Name</label>
         <input class="w3-input w3-border" type="text" name="Name" required>
       </div>
       <div class="w3-group">
-        <label>Email</label>
-          <select name="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
+        <label>Meno</label>
+          <select name="meno">
+            <?php
+            echo"<option value='volvo'></option>";
+            echo"<option value='saab'>Saab</option>";
+            echo"<option value='fiat'>Fiat</option>";
+            echo"<option value='audi'>Audi</option>";
+            ?>
           </select>
       </div>
       <div class="w3-group">

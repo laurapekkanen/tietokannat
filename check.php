@@ -1,4 +1,5 @@
 <?php
+    session_start();
     // Tietokantayhteys
     include "connect.php";
 
@@ -13,6 +14,7 @@
     $num_row = mysqli_num_rows($sql);
 
     if($num_row == 1) {
+        $_SESSION['user'] = $user;
         header("Location:profiili.php");
     } else {
         header( "refresh:2;url=index.php" );
