@@ -22,7 +22,6 @@ body {font-size:16px;}
     // Kutsutaan PHP:n istuntomuuttujia
     echo "Tunnus on " . $_SESSION['user'] . ".<br>";
     //echo "Salasana on " . $_SESSION['password'] . ".";
-
     $query = "select * from KAYTTAJA, KAYTTAJANIMI where KAYTTAJA.kayttajaID=KAYTTANIMI.kayttajaID";
     $sql = mysqli_query($con,$query);
     $rivi = mysqli_fetch_array($sql)

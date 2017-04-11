@@ -13,6 +13,17 @@ body {font-size:16px;}
 </style>
 <body>
 
+<?php
+    // Kutsutaan PHP:n istuntomuuttujia
+    echo "Tunnus on " . $_SESSION['user'] . ".<br>";
+    //echo "Salasana on " . $_SESSION['password'] . ".";
+
+    $query = "select * from KAYTTAJA, KAYTTAJANIMI where KAYTTAJA.kayttajaID=KAYTTANIMI.kayttajaID";
+    $meno = "select * from MENOT";
+    $sql = mysqli_query($con,$query);
+    //$meno = "select * from MENOT";
+?>
+
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
@@ -21,7 +32,7 @@ body {font-size:16px;}
   </div>
   <div class="w3-bar-block">
     <a href="profiili.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Profiili</a>
-    <a href="suunnitelma.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Suunnitelma</a>
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Suunnitelma</a>
     <a href="menottulot.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Menot ja Tulot</a>
     <a href="tilanne.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Tilanne</a>
     <a href="kuukaudet.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Aiemmat kuukaudet</a>
@@ -43,91 +54,88 @@ body {font-size:16px;}
 
   <!-- Header -->
   <div class="w3-container" style="margin-top:80px" id="showcase">
-    <h1 class="w3-jumbo"><b>Budjettilaskuri</b></h1>
-    <h1 class="w3-xxxlarge w3-text-red"><b>Showcase.</b></h1>
+    <h1 class="w3-jumbo"><b>Suunnitelma</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
   </div>
 
-
-  <!-- Services -->
-  <div class="w3-container" id="services" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Services.</b></h1>
+<!-- MENOT -->
+  <div class="w3-container" id="contact" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Menot.</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>We are a interior design service that focus on what's best for your home and what's best for you!</p>
-    <p>Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-group">
+        <label>Meno</label>
+        <input class="w3-input w3-border" type="text" name="meno" required>
+      </div>
+      <div class="w3-group">
+          <label>Tyyppi</label><br>
+          <select name="tyyppi">
+              <option value='tyyppi'>Valitse tyyppi</option>
+            <option name="ruoka" value='ruoka'>Ruoka</option>
+            <option name="laskut" value='laskut'>Laskut</option>
+            <option name="asuminen" value='asuminen'>Asuminen</option>
+            <option name="viihde" value='viihde'>Viihde</option>
+            <option name="liikkuminen" value='liikkuminen'>Liikkuminen</option>
+            <option name="muut" value='muut'>Muut</option>
+          </select>
+      </div>
+      <div class="w3-group">
+        <label>Summa</label>
+        <input class="w3-input w3-border" type="text" name="summa" required>
+      </div>
+      <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Talleta menot</button>
+    </form>
   </div>
 
-  <!-- Designers -->
-  <div class="w3-container" id="designers" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Designers.</b></h1>
+<!-- Tulot -->
+  <div class="w3-container" id="contact" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Tulot.</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>The best team in the world.</p>
-    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <p><b>Our designers are thoughtfully chosen</b>:</p>
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-group">
+        <label>Tulo</label>
+        <input class="w3-input w3-border" type="text" name="tulo" required>
+      </div>
+      <div class="w3-group">
+          <label>Tyyppi</label><br>
+          <select name="tyyppi">
+            <option value='tyyppi'>Valitse tyyppi</option>
+            <option name="ruoka_t" value='ruoka'>Ruoka</option>
+            <option name="laskut_t" value='laskut'>Laskut</option>
+            <option name="asuminen_T" value='asuminen'>Asuminen</option>
+            <option name="viihde_t" value='viihde'>Viihde</option>
+            <option name="liikkuminen_t" value='liikkuminen'>Liikkuminen</option>
+            <option name="muut_T" value='muut'>Muut</option>
+          </select>
+      </div>
+      <div class="w3-group">
+        <label>Summa</label>
+        <input class="w3-input w3-border" type="text" name="summa" required>
+      </div>
+      <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Talleta tulot</button>
+    </form>
   </div>
 
-  <!-- The Team -->
-  <div class="w3-row-padding w3-grayscale">
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-        <div class="w3-container">
-          <h3>John Doe</h3>
-          <p class="w3-opacity">CEO & Founder</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-        <div class="w3-container">
-          <h3>Jane Doe</h3>
-          <p class="w3-opacity">Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
-        <div class="w3-container">
-          <h3>Mike Ross</h3>
-          <p class="w3-opacity">Architect</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Packages / Pricing Tables -->
+<!-- Suunnitellut menot ja tulot -->
   <div class="w3-container" id="packages" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Packages.</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b>Menot ja tulot</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
   </div>
 
   <div class="w3-row-padding">
     <div class="w3-half w3-margin-bottom">
       <ul class="w3-ul w3-light-grey w3-center">
         <li class="w3-dark-grey w3-xlarge w3-padding-32">Menot</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">10 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">20% furniture discount</li>
-        <li class="w3-padding-16">Good deals</li>
+        <li class="w3-padding-16">Ruoka</li>
+        <li class="w3-padding-16">Laskut</li>
+        <li class="w3-padding-16">Asuminen</li>
+        <li class="w3-padding-16">Viihde</li>
+        <li class="w3-padding-16">Liikkuminen</li>
+          <li class="w3-padding-16">Muut</li>
         <li class="w3-padding-16">
+            <h2>Yhteensä</h2>
           <h2>$ 199</h2>
           <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
         </li>
       </ul>
     </div>
@@ -135,42 +143,19 @@ body {font-size:16px;}
     <div class="w3-half">
       <ul class="w3-ul w3-light-grey w3-center">
         <li class="w3-red w3-xlarge w3-padding-32">Tulot</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">50 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">50% furniture discount</li>
-        <li class="w3-padding-16">GREAT deals</li>
+        <li class="w3-padding-16">Ruoka</li>
+        <li class="w3-padding-16">Laskut</li>
+        <li class="w3-padding-16">Asuminen</li>
+        <li class="w3-padding-16">Viihde</li>
+        <li class="w3-padding-16">Liikkuminen</li>
+          <li class="w3-padding-16">Muut</li>
         <li class="w3-padding-16">
+            <h2>Yhteensä</h2>
           <h2>$ 249</h2>
           <span class="w3-opacity">per room</span>
         </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
       </ul>
     </div>
-  </div>
-
-  <!-- Contact -->
-  <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Contact.</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
-    <form action="/action_page.php" target="_blank">
-      <div class="w3-group">
-        <label>Name</label>
-        <input class="w3-input w3-border" type="text" name="Name" required>
-      </div>
-      <div class="w3-group">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required>
-      </div>
-      <div class="w3-group">
-        <label>Message</label>
-        <input class="w3-input w3-border" type="text" name="Message" required>
-      </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Send Message</button>
-    </form>
   </div>
 
 <!-- End page content -->
