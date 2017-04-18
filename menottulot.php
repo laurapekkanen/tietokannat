@@ -1,3 +1,7 @@
+<?php
+    // Aloitetaan istunto
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -32,17 +36,17 @@ body {font-size:16px;}
   </div>
   <div class="w3-bar-block">
     <a href="profiili.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Profiili</a>
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Suunnitelma</a>
-    <a href="menottulot.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Menot ja Tulot</a>
+    <a href="suunnitelma.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Suunnitelma</a>
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Menot ja Tulot</a>
     <a href="tilanne.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Tilanne</a>
     <a href="kuukaudet.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Aiemmat kuukaudet</a>
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Kirjaudu ulos</a>
+    <a href="destroy_session.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Kirjaudu ulos</a>
   </div>
 </nav>
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">â˜°</a>
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">MENU</a>
   <span>Budjettilaskuri</span>
 </header>
 

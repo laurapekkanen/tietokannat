@@ -4,31 +4,22 @@
 
     // Lomakkeen muuttujat ($_POST-määritys kerää tiedon lomakkeen osoitetusta kentästä)
     $summa = $_POST['summa'];
-    $tyyppi = $_POST['tyyppi'];
+    $tyyppi_meno = $_POST['tyyppi_meno'];
 
-    /*switch(){
-        case 1:
-            "insert into MENOT (ruoka) values('$summa')"
-            break;
-    }*/
-
-
-
-    //$query4 = "insert into MENOT (ruoka) values('$summa')";
-
-    if($tyyppi=='ruoka'){
+    //menot
+    if($tyyppi_meno=='ruoka'){
         $query4 = "insert into MENOT (ruoka) values('$summa')";
-    }if($tyyppi=='laskut'){
+    }if($tyyppi_meno=='laskut'){
         $query4 = "insert into MENOT (laskut) values('$summa')";
-    }if($tyyppi=='asuminen'){
+    }if($tyyppi_meno=='asuminen'){
         $query4 = "insert into MENOT (asuminen) values('$summa')";
-    }if($tyyppi=='viihde'){
+    }if($tyyppi_meno=='viihde'){
         $query4 = "insert into MENOT (viihde) values('$summa')";
-    }if($tyyppi=='liikkuminen'){
+    }if($tyyppi_meno=='liikkuminen'){
         $query4 = "insert into MENOT (liikkuminen) values('$summa')";
-    }if($tyyppi=='muut'){
+    }if($tyyppi_meno=='muut'){
         $query4 = "insert into MENOT (muut) values('$summa')";
-    }
+    };
 
     mysqli_query($con,$query4) or die ("Jotain meni vikaan");
 
